@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "build/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "db:push": {
+      "cache": false
+    }
+  },
+  "globalEnv": ["DATABASE_URL", "JWT_SECRET", "COOKIE_SECRET", "CCG_A", "CCG_B", "CCG_S", "CCG_M"]
+}

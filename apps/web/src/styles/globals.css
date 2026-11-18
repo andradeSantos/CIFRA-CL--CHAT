@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode (default) */
+    --bg-primary: #F6F1E9;
+    --bg-secondary: #EBE2D3;
+    --bg-tertiary: #FDF8F0;
+    --border-main: #D5C7B2;
+    --text-primary: #2B1E16;
+    --text-secondary: #6E5849;
+    --text-muted: #9A8B7A;
+    --accent-primary: #A65E2E;
+    --accent-secondary: #C28449;
+    --accent-hover: #8B4D26;
+    --surface: #FFFFFF;
+    --surface-hover: #F5EDE3;
+    --shadow-color: rgba(43, 30, 22, 0.1);
+    --overlay-bg: rgba(28, 21, 17, 0.5);
+  }
+
+  .dark {
+    /* Dark mode (Terra Noturna) */
+    --bg-primary: #1C1511;
+    --bg-secondary: #291F19;
+    --bg-tertiary: #1C1511;
+    --border-main: #3D3028;
+    --text-primary: #F6F1E9;
+    --text-secondary: #C28449;
+    --text-muted: #9A8B7A;
+    --accent-primary: #C28449;
+    --accent-secondary: #A65E2E;
+    --accent-hover: #D49B5A;
+    --surface: #291F19;
+    --surface-hover: #332820;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+
+  * {
+    @apply border-earth-border dark:border-bordermain;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] dark:bg-[var(--bg-primary)] dark:text-[var(--text-primary)] font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-earth-border dark:bg-bordermain rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-umber dark:bg-ochre;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-terracotta dark:ring-ochre ring-offset-2 ring-offset-[var(--bg-primary)] dark:ring-offset-[var(--bg-primary)];
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-terracotta/30 dark:bg-ochre/30;
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-medium text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta dark:focus-visible:ring-ochre disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-terracotta text-white hover:bg-[var(--accent-hover)] dark:bg-ochre dark:hover:bg-[var(--accent-hover)] shadow-sm hover:shadow-md active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-sand dark:bg-bark text-[var(--text-primary)] dark:text-[var(--text-primary)] border border-earth-border dark:border-bordermain hover:bg-[var(--surface-hover)] dark:hover:bg-[var(--surface-hover)] active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-umber dark:text-ochre hover:bg-[var(--surface-hover)] dark:hover:bg-[var(--surface-hover)] active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700 active:scale-[0.98];
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 rounded-2xl bg-[var(--surface)] border border-earth-border dark:border-bordermain text-[var(--text-primary)] dark:text-[var(--text-primary)] placeholder-umber dark:placeholder-ochre transition-all duration-200 focus:border-terracotta dark:focus:border-ochre focus:ring-2 focus:ring-terracotta/20 dark:focus:ring-ochre/20;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-[var(--surface)] dark:bg-bark rounded-3xl border border-earth-border dark:border-bordermain shadow-sm;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-md hover:border-ochre dark:hover:border-ochre transition-all duration-200;
+  }
+
+  /* Message bubble */
+  .message-bubble {
+    @apply max-w-[75%] px-4 py-2.5 rounded-2xl font-mono text-sm leading-relaxed animate-slide-up;
+  }
+
+  .message-bubble-own {
+    @apply message-bubble bg-terracotta text-white rounded-br-md self-end;
+  }
+
+  .message-bubble-other {
+    @apply message-bubble bg-sand dark:bg-bark text-umber dark:text-ochre border border-earth-border dark:border-bordermain rounded-bl-md self-start;
+  }
+
+  .message-bubble-cipher {
+    @apply font-mono tracking-wider;
+  }
+
+  /* Context menu */
+  .context-menu {
+    @apply fixed z-50 min-w-[160px] bg-[var(--surface)] dark:bg-bark rounded-2xl border border-earth-border dark:border-bordermain shadow-lg overflow-hidden animate-spring-in backdrop-blur-sm;
+  }
+
+  .context-menu-item {
+    @apply flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] dark:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] dark:hover:bg-[var(--surface-hover)] cursor-pointer transition-colors;
+  }
+
+  /* Progress ring for decrypt timer */
+  .progress-ring {
+    @apply transform -rotate-90;
+  }
+
+  .progress-ring-circle {
+    @apply transition-all duration-100 ease-linear;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-rank {
+    @apply badge bg-terracotta/10 text-terracotta dark:bg-ochre/10 dark:text-ochre;
+  }
+
+  /* Code/math display */
+  .code-block {
+    @apply font-mono text-sm bg-sand dark:bg-bark p-4 rounded-2xl border border-earth-border dark:border-bordermain overflow-x-auto;
+  }
+
+  /* Table for sandbox */
+  .sandbox-table {
+    @apply w-full border-collapse font-mono text-sm;
+  }
+
+  .sandbox-table th {
+    @apply px-3 py-2 text-left text-umber dark:text-ochre font-medium border-b border-earth-border dark:border-bordermain;
+  }
+
+  .sandbox-table td {
+    @apply px-3 py-2 text-[var(--text-primary)] dark:text-[var(--text-primary)] border-b border-earth-border/50 dark:border-bordermain/50;
+  }
+
+  .sandbox-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .sandbox-table tr:hover td {
+    @apply bg-[var(--surface-hover)] dark:bg-[var(--surface-hover)];
+  }
+
+  /* Animation for decrypt reveal */
+  .decrypt-reveal {
+    @apply animate-blur-in;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    @apply backdrop-blur-md bg-white/80 dark:bg-[var(--bg-primary)]/80;
+  }
+
+  .glass-strong {
+    @apply backdrop-blur-xl bg-white/90 dark:bg-[var(--bg-primary)]/90;
+  }
+}
