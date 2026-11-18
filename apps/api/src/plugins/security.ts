@@ -33,12 +33,29 @@ export default fp(async (fastify: FastifyInstance) => {
   });
 
   // Registrar CORS
-  const allowedOrigins = process.env.FRONTEND_URL
-    ? [process.env.FRONTEND_URL, 'http://localhost:10022', 'http://127.0.0.1:10022']
-    : ['http://localhost:10022', 'http://127.0.0.1:10022', 'http://localhost:3000', 'http://127.0.0.1:3000'];
+  const configuredFrontendUrl = process.env.FRONTEND_URL;
 
   await fastify.register(cors, {
-    origin: allowedOrigins,
+    origin: (origin, cb) => {
+      // Requisições sem origem (ex.: curl, Postman) são liberadas
+      if (!origin) {
+        return cb(null, true);
+      }
+
+      // Em produção restringe às origens configuradas em FRONTEND_URL
+      if (configuredFrontendUrl) {
+        const allowed = [
+          configuredFrontendUrl,
+          'http://localhost:10022',
+          'http://127.0.0.1:10022',
+        ];
+        return cb(null, allowed.includes(origin) ? origin : false);
+      }
+
+      // Desenvolvimento / acesso pela rede local: aceita qualquer origem,
+      // refletindo-a. Necessário quando o front é acessado pelo IP do servidor.
+      cb(null, true);
+    },
     credentials: true,
   });
 

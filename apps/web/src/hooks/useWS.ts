@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from './useAuth';
+import { getWsUrl } from '@/lib/socket-url';
 
 export interface Message {
   id: string;
@@ -27,7 +28,7 @@ export function useWS() {
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const reconnectAttempts = useRef(0);
 
-  const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3001';
+  const WS_URL = getWsUrl();
 
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
