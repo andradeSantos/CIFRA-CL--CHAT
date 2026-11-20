@@ -22,7 +22,7 @@ const TABS: { id: TabId; label: string; icon: typeof BookOpen }[] = [
 ];
 
 export default function AcademiaPage() {
-  const [activeTab, setActiveTab] = useState<TabId>('manual');
+  const [activeTab, setActiveTab] = useState<TabId>('resumo');
 
   return (
     <div className="min-h-screen bg-sand-light dark:bg-dark-earth flex flex-col">
