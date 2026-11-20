@@ -4,19 +4,21 @@ import { useState } from 'react';
 import { BookOpen, Sigma, Terminal, Trophy, FlaskConical } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { ManualHistorico } from '@/components/academia/ManualHistorico';
+import { ResumoCifra } from '@/components/academia/ResumoCifra';
 import { RaioXMatematico } from '@/components/academia/RaioXMatematico';
 import { SandboxLab } from '@/components/academia/SandboxLab';
 import { DesafiosRecruta } from '@/components/academia/DesafiosRecruta';
 import { PainelDemo } from '@/components/academia/PainelDemo';
 
-type TabId = 'manual' | 'raiox' | 'sandbox' | 'desafios' | 'demo';
+type TabId = 'manual' | 'resumo' | 'raiox' | 'sandbox' | 'desafios' | 'demo';
 
 const TABS: { id: TabId; label: string; icon: typeof BookOpen }[] = [
   { id: 'manual', label: '1. Manual Histórico', icon: BookOpen },
-  { id: 'raiox', label: '2. Raio-X Matemático', icon: Sigma },
-  { id: 'sandbox', label: '3. Laboratório Sandbox', icon: Terminal },
-  { id: 'desafios', label: '4. Desafios do Recruta', icon: Trophy },
-  { id: 'demo', label: '5. Painel Demo', icon: FlaskConical },
+  { id: 'resumo', label: '2. Resumo da Cifra', icon: BookOpen },
+  { id: 'raiox', label: '3. Raio-X Matemático', icon: Sigma },
+  { id: 'sandbox', label: '4. Laboratório Sandbox', icon: Terminal },
+  { id: 'desafios', label: '5. Desafios do Recruta', icon: Trophy },
+  { id: 'demo', label: '6. Painel Demo', icon: FlaskConical },
 ];
 
 export default function AcademiaPage() {
@@ -57,6 +59,7 @@ export default function AcademiaPage() {
 
           <main className="flex-1 min-w-0">
             {activeTab === 'manual' && <ManualHistorico />}
+            {activeTab === 'resumo' && <ResumoCifra />}
             {activeTab === 'raiox' && <RaioXMatematico />}
             {activeTab === 'sandbox' && <SandboxLab />}
             {activeTab === 'desafios' && <DesafiosRecruta />}
