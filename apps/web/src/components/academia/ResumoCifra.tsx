@@ -14,13 +14,13 @@ const PASSOS = [
     num: 2,
     titulo: 'Aplica a fórmula de cifragem',
     texto:
-      'cᵢ = (a × pᵢ + b + s × i) mod M. Multiplica pelo dispersor, soma o deslocamento da sala e o passo posicional, depois tira o resto da divisão por M.',
+      'cᵢ = (a × pᵢ + b + s × i) mod M. Multiplica pela Chave Multiplicativa (a), soma a Chave de Deslocamento (b) e o Salto Posicional (s·i), depois tira o resto da divisão por M.',
   },
   {
     num: 3,
     titulo: 'O resultado é a cifra',
     texto:
-      'O número restante (cᵢ) vira caractere novamente. Como o passo depende da posição i, letras iguais em lugares diferentes (ex: dois “A” em “ATAQUE”) geram cifras distintas.',
+      'O número restante (cᵢ) vira caractere novamente. Como o salto depende da posição i, letras iguais em lugares diferentes (ex: dois “A” em “ATAQUE”) geram cifras distintas.',
   },
   {
     num: 4,
@@ -35,7 +35,7 @@ const DIFERENCIAIS = [
     icon: ShieldCheck,
     titulo: 'Não repete a mesma letra',
     texto:
-      'Graças ao passo tático s·i, o “A” na posição 0 e o “A” na posição 2 cifram diferente. Isso resiste à análise de frequência que quebra a Cifra de César.',
+      'Graças ao Salto Posicional (s·i), o “A” na posição 0 e o “A” na posição 2 cifram diferente. Isso resiste à análise de frequência que quebra a Cifra de César.',
   },
   {
     icon: Zap,
@@ -47,7 +47,7 @@ const DIFERENCIAIS = [
     icon: Link2,
     titulo: 'Chave validada automaticamente',
     texto:
-      'O “a” deve ser coprimo de M (mdc(a, M) = 1) para ter inverso modular. O sistema só aceita chaves válidas, garantindo que toda mensagem cifrada possa ser decifrada.',
+      'A Chave Multiplicativa (a) deve ser coprima de M (mdc(a, M) = 1) para ter inverso modular. O sistema só aceita chaves válidas, garantindo que toda mensagem cifrada possa ser decifrada.',
   },
 ];
 
@@ -126,7 +126,7 @@ export function ResumoCifra() {
               Chave de produção do Chat Clã
             </h4>
             <p className="text-sm text-umber dark:text-sand-light/80 leading-relaxed">
-              M = 95 (todos os caracteres ASCII imprimíveis), a = 7, b = 8, s = 3. A inversa modular de 7
+              M = 95 (todos os caracteres ASCII imprimíveis), Chave Multiplicativa a = 7, Chave de Deslocamento b = 8, Salto Posicional s = 3. A inversa modular de 7
               mod 95 é 68, pois 7 × 68 = 476 = 5 × 95 + 1.
             </p>
           </div>
